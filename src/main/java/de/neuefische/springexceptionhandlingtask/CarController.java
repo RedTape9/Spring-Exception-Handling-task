@@ -1,5 +1,7 @@
 package de.neuefische.springexceptionhandlingtask;
 
+import de.neuefische.springexceptionhandlingtask.exceptions.CarBrandNotAllowedException;
+import de.neuefische.springexceptionhandlingtask.exceptions.NoCarsAvailableException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.NoSuchElementException;
@@ -11,13 +13,13 @@ public class CarController {
     @GetMapping("{brand}")
     String getCarBrand(@PathVariable String brand) {
         if (!brand.equals("porsche")) {
-            throw new IllegalArgumentException("Only 'porsche' allowed");
+            throw new CarBrandNotAllowedException("Only 'porsche' allowed");
         }
         return brand;
     }
 
     @GetMapping
     String getAllCars() {
-        throw new NoSuchElementException("No Cars found");
+        throw new NoCarsAvailableException("No Cars found");
     }
 }
